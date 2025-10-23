@@ -6,8 +6,8 @@
   <title>Hand Detection</title>
 
   <!-- Import MediaPipe and Drawing Utilities -->
-  <script src="./Hand Detection_files/drawing_utils.js.descarga" crossorigin="anonymous"></script>
-  <script src="./Hand Detection_files/hands.js.descarga" crossorigin="anonymous"></script>
+  <script src="./Hand Detection2_files/drawing_utils.js.descarga" crossorigin="anonymous"></script>
+  <script src="./Hand Detection2_files/hands.js.descarga" crossorigin="anonymous"></script>
 
   <!-- Minimal CSS to center video and canvas -->
   <style>
@@ -77,6 +77,18 @@ async function predictWebcam() {
         drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: "#00FF00", lineWidth: 5 });
         drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
 
+        // Dibuja un punto verde en la punta del dedo índice (landmark 8)
+        const indexTip = landmarks[8];
+        const indexX = indexTip.x * canvas.width;
+        const indexY = indexTip.y * canvas.height;
+
+        canvasCtx.beginPath();
+        canvasCtx.arc(indexX, indexY, 10, 0, 2 * Math.PI); // radio 10 píxeles
+        canvasCtx.fillStyle = "#00FF00";
+        canvasCtx.fill();
+        canvasCtx.closePath();
+
+
         // Loop through each landmark and print its coordinates on the canvas
         landmarks.forEach((landmark, index) => {
           const { x, y, z } = landmark;
@@ -101,4 +113,4 @@ async function predictWebcam() {
   </script>
 
 
-<script src="./Hand Detection_files/vision_wasm_internal.js.descarga" crossorigin="anonymous"></script></body></html>
+<script src="./Hand Detection2_files/vision_wasm_internal.js.descarga" crossorigin="anonymous"></script></body></html>
